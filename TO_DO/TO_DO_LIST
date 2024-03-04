@@ -1,0 +1,151 @@
+#include <iostream>
+#include <vector>
+using namespace std;
+
+// UJJWALS TO-DO LIST APPLICATION
+
+class ToDoList
+{
+
+public:
+    // FUNCTION TO ADD  A TASK;
+
+    vector<string> tasks; /*vector<string>: This is a template class from the C++ Standard Template Library (STL) that represents a dynamic array.
+                          In this case, vector<string> specifies that we're creating a vector (dynamic array) that stores strings.
+                          tasks: This is the name of the variable we're declaring. In this context, tasks represents the vector that will store our to-do list items.*/
+
+    /*https://cplusplus.com/reference/vector/vector/     this is a link which contanins all the things associated with vector and their respective uses*/
+
+    void addTask(void)
+    {
+
+        string task;
+        cout << "Enter Your Task :";
+
+        cin.ignore();
+        getline(cin, task);
+        tasks.push_back(task);
+        cout << "YOUR TASK WAS ADDED SUCCESSFULLY" << endl;
+    }
+
+    // FUNCTION TO REMOVE A TASK;
+
+    void removeTask(void)
+    {
+
+        if (tasks.empty())
+        {
+            cout << "THERE ARE NO TASKS " << endl;
+            return;
+        }
+
+        int index;
+        cin >> index;
+
+        cout << "ENTER YOUR TASK NO. IF YOU DONT KNOW WHAT IT IS FEEL FREE TO ACCESS THE VIEW YOUR TASKS FUNCTION" << endl;
+
+        if (index >= 1 && index <= tasks.size())
+        {
+            tasks.erase(tasks.begin() + (index - 1));
+            cout << "TASK REMOVED SUCCESSFULLY " << endl;
+        }
+        else
+        {
+            cout << "INVALID INPUT TRY AGAIN" << endl;
+        }
+    }
+
+    // FUNCTION TO MARK A TASK COMPLETE
+
+    void markCompleted()
+    {
+
+        if (tasks.empty())
+        {
+            cout << "THERE ARE NO TASKS " << endl;
+            return;
+        }
+
+        int index;
+
+        cout << "ENTER  THE TASK NUMBER THAT YOU WANT TO REMOVE" << endl;
+        cin >> index;
+
+        if (index >= 1 && index <= tasks.size())
+        {
+            tasks[index - 1] += " (Completed) ";
+            cout << " Task marked completed" << endl;
+        }
+        else
+        {
+            cout << "INVALID INPUT " << endl;
+        }
+    }
+
+    // FUNTION TO DISPLAY TO DO LIST
+
+    void displayTasks()
+    {
+
+     
+        if (tasks.empty())
+        {
+            cout << "THERE ARE NO TASKS " << endl;
+            return;
+        }else{
+            cout<<"YOUR TASKS IN TO-DO LIST"<<endl;
+            for (int i = 0; i < tasks.size(); i++)
+            {
+                cout<< i + 1<<"."<<tasks[i]<<endl;
+                
+            }
+            
+        }
+
+
+
+    }
+};
+
+int main()
+{
+
+
+     ToDoList todoList;
+
+    while (true) {
+        cout << "\n===== To-Do List Menu =====" << endl;
+        cout << "1. Add Task" << endl;
+        cout << "2. Remove Task" << endl;
+        cout << "3. Mark Task as Completed" << endl;
+        cout << "4. View To-Do List" << endl;
+        cout << "5. Exit" << endl;
+        cout << "Enter your choice (1-5): ";
+
+        int choice;
+        cin >> choice;
+
+        switch (choice) {
+            case 1:
+                todoList.addTask();
+                break;
+            case 2:
+                todoList.removeTask();
+                break;
+            case 3:
+                todoList.markCompleted();
+                break;
+            case 4:
+                todoList.displayTasks();
+                break;
+            case 5:
+                cout << "Exiting..." << endl;
+                return 0;
+            default:
+                cout << "Invalid choice. Please enter a number between 1 and 5." << endl;
+        }
+    }
+
+    return 0;
+}
+
